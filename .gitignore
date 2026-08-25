@@ -1,0 +1,7 @@
+node_modules/
+.env
+dist/
+scratch/
+*.log
+backend/dev.db
+backend/public/
