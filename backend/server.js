@@ -70,26 +70,6 @@ app.get('/api/health', async (req, res) => {
   }
 });
 
-// Serve Static Frontend (Production)
-const frontendPath = path.join(__dirname, '../frontend/dist');
-app.use(express.static(frontendPath, {
-  setHeaders: (res, path) => {
-    if (path.endsWith('.html')) {
-      res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
-      res.setHeader('Pragma', 'no-cache');
-      res.setHeader('Expires', '0');
-    }
-  }
-}));
-
-// Catch-all route to serve the React App for any non-API routes
-app.use((req, res) => {
-  res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
-  res.setHeader('Pragma', 'no-cache');
-  res.setHeader('Expires', '0');
-  res.sendFile(path.join(frontendPath, 'index.html'));
-});
-
 // Global Error Handler to ensure JSON responses
 app.use((err, req, res, next) => {
   console.error('Global Error:', err);
