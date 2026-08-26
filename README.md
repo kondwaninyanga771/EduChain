@@ -25,7 +25,8 @@ The **Blockchain Security Framework for an Online Student Evaluation System** is
 
 ### Backend & Database
 *   **Node.js & Express.js:** Server-side operations, API management, and blockchain communication.
-*   **SQLite / PostgreSQL:** Relational database for storing off-chain data (user profiles, course details).
+*   **PostgreSQL (Neon):** Cloud-hosted relational database for storing off-chain data (user profiles, course details).
+*   **Prisma ORM:** Modern Object-Relational Mapper for safe, structured database interactions.
 
 ### Frontend
 *   **React.js:** Dynamic and responsive user interface for dashboards (Students, Lecturers, Admins).
@@ -107,17 +108,9 @@ student-evaluation-system/
 
 *(More detailed setup instructions to follow as development progresses)*
 
-## Roadmap & Timeline
+## Deployment Architecture (Cloud)
 
-| Week | Description |
-| :--- | :--- |
-| **Week 1** | Requirements & System Architecture Design |
-| **Week 2** | Database Design & Implementation |
-| **Week 3** | Authentication (JWT, bcrypt, Role-based access) |
-| **Week 4** | Backend API Development |
-| **Week 5** | Frontend Development (React + Tailwind) |
-| **Week 6** | Smart Contract Development (Solidity, Remix, Truffle) |
-| **Week 7** | Web3 + IPFS Integration |
-| **Week 8** | System Testing (Unit, Integration, UAT) |
-| **Week 9** | Security Review & Hardening |
-| **Week 10** | Deployment (Vercel, Railway, Sepolia/Mainnet) |
+This application is fully decoupled and deployed across a modern, highly-available cloud architecture:
+1. **Frontend (Vercel):** The React UI is deployed on Vercel for lightning-fast global CDN delivery. It uses an internal proxy (`vercel.json` rewrites) to securely tunnel API requests to the backend.
+2. **Backend (Render.com):** The Node/Express API operates on Render, acting as the heavy-lifting bridge between the Frontend, the Database, and the Ethereum Blockchain (via Web3.js). It handles all secure transactions and IPFS pinning.
+3. **Database (Neon.tech):** A serverless PostgreSQL instance running on Neon provides persistent, scalable, and fully relational off-chain storage.
